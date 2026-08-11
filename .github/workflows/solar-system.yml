@@ -27,6 +27,6 @@ jobs:
                 echo "MONGO_URI configured: ${MONGO_URI:+yes}"
                 echo "MONGO_USERNAME configured: ${MONGO_USERNAME:+yes}"
                 echo "MONGO_PASSWORD configured: ${MONGO_PASSWORD:+yes}"  
-            - name: Unit Testing
+            - name: Unit Testings
               run: npm test
 
