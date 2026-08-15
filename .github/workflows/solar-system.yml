@@ -12,7 +12,10 @@ env:
 jobs:
     unit-testing:
         name: Unit Testing
-        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            os: [ ubuntu-latest ]
+        runs-on:  ${{ matrix.os}}
         steps:
             - name: Git Checkout
               uses: actions/checkout@v7
@@ -20,13 +23,18 @@ jobs:
               uses: actions/setup-node@v7
               with:
                 node-version: 24
+            - name: Cache NPM Dependencies
+              uses:  actions/cache@v6
+              with:
+                path: node-modules
+                key: ${{ runner.os }}-node-modules-${{hashFiles('package-lock.json')}}     
             - name: Install Node Dependencies
               run: npm install
             - name: Unit Testing
               id: nodejs-unit-testing
               run: npm test
             - name: Archive Artefacts
-              if: steps.nodejs-unit-testing.outcome == 'failure' || steps.nodejs-unit-testing.outcome == 'success' 
+              if: always()
               uses: actions/upload-artifact@v7
               with:
                 name: Mocha-Test-Result
