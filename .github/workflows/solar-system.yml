@@ -5,6 +5,9 @@ on:
         branches: 
             - main
             - 'feature/*'
+concurrency: 
+  group: ${{github.ref}}+${{github.sha}}
+  cancel-in-progress: false            
 env:
     MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
     MONGO_USERNAME: ${{ vars.MONGO_USERNAME }}
