@@ -54,6 +54,8 @@ jobs:
     docker:
       name: Containerization
       needs: [unit-testing]
+      permissions: 
+        packages: write
       strategy:
         matrix:
           os: [ubuntu-latest]
