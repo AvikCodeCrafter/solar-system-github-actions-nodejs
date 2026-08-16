@@ -6,7 +6,7 @@ on:
             - main
             - 'feature/*'
 concurrency: 
-  group: ${{github.ref}}+${{github.sha}}
+  group: CI Pipeline
   cancel-in-progress: false            
 env:
     MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
